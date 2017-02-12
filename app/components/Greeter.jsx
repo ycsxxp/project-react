@@ -3,7 +3,7 @@ import React from 'react';
 class Greeter extends React.Component {
 	render() {
 		return (
-			<div>Hello React+Webpack new</div>
+			<div>Hello React+Webpack Macbook Test</div>
 		)
 	}
 }
