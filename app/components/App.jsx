@@ -191,7 +191,6 @@ class AppComponent extends React.Component {
         // 取出要布局上侧的图片的状态信息
         topImgIndex = Math.ceil(Math.random() * (imgsPositionArr.length - topImgNum));
         imgsTopArr = imgsPositionArr.splice(topImgIndex, topImgNum);
-        console.log(imgsTopArr);
         // 布局位于上侧的图片
         imgsTopArr.forEach(function(value, index) {
             imgsTopArr[index] = {
