@@ -317,6 +317,11 @@ class AppComponent extends React.Component {
         		<nav className="controller-nav">
         			{controllerUnits}
         		</nav>
+        		<section className="music-sec">
+        			<audio controls="controls" autoPlay="autoPlay">
+        				<source src="sugar.mp3" type="audio/mpeg"/>
+        			</audio>
+        		</section>
       		</section>
         );
     }
