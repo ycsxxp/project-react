@@ -98,7 +98,7 @@ class ControllerUnit extends React.Component {
         } else {
             this.props.center();
         }
-
+        document.getElementById("media").play();
         e.preventDefault();
         e.stopPropagation();
     }
@@ -117,39 +117,38 @@ class ControllerUnit extends React.Component {
             <span className={controlelrUnitClassName} onClick={this.handleClick}></span>
         );
     }
-}
-;
+};
 
 class AppComponent extends React.Component {
 
     constructor(props) {
-        super(props);
-        // this.inverse = this.inverse.bind(this);
-        // this.center = this.center.bind(this);
-        this.state = {
-            imgsPositionArr: []
-        };
-        this.position = {
-            centerPos: {
-                left: 0,
-                right: 0
-            },
-            xPosRange: {
-                leftSecX: [0, 0],
-                rightSecX: [0, 0],
-                y: [0, 0]
-            },
-            yPosRange: {
-                x: [0, 0],
-                topY: [0, 0]
-            }
-        };
-    }
-    /*
-     * 翻转图片
-     * @param index 传入当前被执行inverse操作的图片对应的图片信息数组的index值
-     * @returns {Function} 这是一个闭包函数, 其内return一个真正待被执行的函数
-     */
+            super(props);
+            // this.inverse = this.inverse.bind(this);
+            // this.center = this.center.bind(this);
+            this.state = {
+                imgsPositionArr: []
+            };
+            this.position = {
+                centerPos: {
+                    left: 0,
+                    right: 0
+                },
+                xPosRange: {
+                    leftSecX: [0, 0],
+                    rightSecX: [0, 0],
+                    y: [0, 0]
+                },
+                yPosRange: {
+                    x: [0, 0],
+                    topY: [0, 0]
+                }
+            };
+        }
+        /*
+         * 翻转图片
+         * @param index 传入当前被执行inverse操作的图片对应的图片信息数组的index值
+         * @returns {Function} 这是一个闭包函数, 其内return一个真正待被执行的函数
+         */
     inverse(index) {
         return function() {
             let imgsPositionArr = this.state.imgsPositionArr;
@@ -164,86 +163,86 @@ class AppComponent extends React.Component {
 
     //重新布局所有图片 centerIndex参数为选中要居中的图片索引
     rearrange(centerIndex) {
-        let imgsPositionArr = this.state.imgsPositionArr,
-            position = this.position,
-            centerPos = position.centerPos,
-            xPosRange = position.xPosRange,
-            yPosRange = position.yPosRange,
-            xPosRangeLeftSecX = xPosRange.leftSecX,
-            xPosRangeRightSecX = xPosRange.rightSecX,
-            xPosRangeY = xPosRange.y,
-            yPosRangeX = yPosRange.x,
-            yPosRangeTopY = yPosRange.topY,
+            let imgsPositionArr = this.state.imgsPositionArr,
+                position = this.position,
+                centerPos = position.centerPos,
+                xPosRange = position.xPosRange,
+                yPosRange = position.yPosRange,
+                xPosRangeLeftSecX = xPosRange.leftSecX,
+                xPosRangeRightSecX = xPosRange.rightSecX,
+                xPosRangeY = xPosRange.y,
+                yPosRangeX = yPosRange.x,
+                yPosRangeTopY = yPosRange.topY,
 
-            //shang ban bu fen tu pian shu zu
-            imgsTopArr = [],
-            topImgNum = Math.floor(Math.random() * 2), //one or none
-            //shang ceng tu pian de shu zu suo yin
-            topImgIndex = 0,
+                //shang ban bu fen tu pian shu zu
+                imgsTopArr = [],
+                topImgNum = Math.floor(Math.random() * 2), //one or none
+                //shang ceng tu pian de shu zu suo yin
+                topImgIndex = 0,
 
-            //juzhong de tupian xinxi
-            imgCenterArr = imgsPositionArr.splice(centerIndex, 1);
+                //juzhong de tupian xinxi
+                imgCenterArr = imgsPositionArr.splice(centerIndex, 1);
 
-        imgCenterArr[0] = {
-            pos: centerPos,
-            rotate: 0,
-            isInverse: false,
-            isCenter: true
-        };
-
-        // 取出要布局上侧的图片的状态信息
-        topImgIndex = Math.ceil(Math.random() * (imgsPositionArr.length - topImgNum));
-        imgsTopArr = imgsPositionArr.splice(topImgIndex, topImgNum);
-        // 布局位于上侧的图片
-        imgsTopArr.forEach(function(value, index) {
-            imgsTopArr[index] = {
-                pos: {
-                    top: getRandomRange(yPosRangeTopY[0], yPosRangeTopY[1]),
-                    left: getRandomRange(yPosRangeX[0], yPosRangeX[1])
-                },
-                rotate: getRandomRotate(),
+            imgCenterArr[0] = {
+                pos: centerPos,
+                rotate: 0,
                 isInverse: false,
-                isCenter: false
+                isCenter: true
             };
-        });
 
-        // 布局左右两侧的图片
-        for (var i = 0, j = imgsPositionArr.length, k = j / 2; i < j; i++) {
-            var xPosRangeLORX = null;
+            // 取出要布局上侧的图片的状态信息
+            topImgIndex = Math.ceil(Math.random() * (imgsPositionArr.length - topImgNum));
+            imgsTopArr = imgsPositionArr.splice(topImgIndex, topImgNum);
+            // 布局位于上侧的图片
+            imgsTopArr.forEach(function(value, index) {
+                imgsTopArr[index] = {
+                    pos: {
+                        top: getRandomRange(yPosRangeTopY[0], yPosRangeTopY[1]),
+                        left: getRandomRange(yPosRangeX[0], yPosRangeX[1])
+                    },
+                    rotate: getRandomRotate(),
+                    isInverse: false,
+                    isCenter: false
+                };
+            });
 
-            // 前半部分布局左边， 右半部分布局右边
-            if (i < k) {
-                xPosRangeLORX = xPosRangeLeftSecX;
-            } else {
-                xPosRangeLORX = xPosRangeRightSecX;
+            // 布局左右两侧的图片
+            for (var i = 0, j = imgsPositionArr.length, k = j / 2; i < j; i++) {
+                var xPosRangeLORX = null;
+
+                // 前半部分布局左边， 右半部分布局右边
+                if (i < k) {
+                    xPosRangeLORX = xPosRangeLeftSecX;
+                } else {
+                    xPosRangeLORX = xPosRangeRightSecX;
+                }
+
+                imgsPositionArr[i] = {
+                    pos: {
+                        top: getRandomRange(xPosRangeY[0], xPosRangeY[1]),
+                        left: getRandomRange(xPosRangeLORX[0], xPosRangeLORX[1])
+                    },
+                    rotate: getRandomRotate(),
+                    isInverse: false,
+                    isCenter: false
+                };
+
             }
 
-            imgsPositionArr[i] = {
-                pos: {
-                    top: getRandomRange(xPosRangeY[0], xPosRangeY[1]),
-                    left: getRandomRange(xPosRangeLORX[0], xPosRangeLORX[1])
-                },
-                rotate: getRandomRotate(),
-                isInverse: false,
-                isCenter: false
-            };
+            if (imgsTopArr && imgsTopArr[0]) {
+                imgsPositionArr.splice(topImgIndex, 0, imgsTopArr[0]);
+            }
 
+            imgsPositionArr.splice(centerIndex, 0, imgCenterArr[0]);
+            this.setState({
+                imgsPositionArr: imgsPositionArr
+            });
         }
-
-        if (imgsTopArr && imgsTopArr[0]) {
-            imgsPositionArr.splice(topImgIndex, 0, imgsTopArr[0]);
-        }
-
-        imgsPositionArr.splice(centerIndex, 0, imgCenterArr[0]);
-        this.setState({
-            imgsPositionArr: imgsPositionArr
-        });
-    }
-    /*
-     * 利用arrange函数， 居中对应index的图片
-     * @param index, 需要被居中的图片对应的图片信息数组的index值
-     * @returns {Function}
-     */
+        /*
+         * 利用arrange函数， 居中对应index的图片
+         * @param index, 需要被居中的图片对应的图片信息数组的index值
+         * @returns {Function}
+         */
     center(index) {
         return function() {
             this.rearrange(index);
@@ -323,7 +322,6 @@ class AppComponent extends React.Component {
     }
 }
 
-AppComponent.defaultProps = {
-};
+AppComponent.defaultProps = {};
 
 export default AppComponent;
