@@ -12,8 +12,10 @@
 </body>
 <script type="text/javascript">
 window.onload = function() {
-    var media = document.getElementById('media');
-    media.play();
+	var media = document.getElementById('media');
+    media.addEventListener("canplay",function(){
+    	document.getElementById('media').play();
+    });
 }
 </script>
 </html>

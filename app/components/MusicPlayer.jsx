@@ -13,7 +13,7 @@ class MusicPlayer extends React.Component {
 	render() {
 		return (
 			<div id="audio_btn" className="off rotate">
-      			<audio loop="loop" src={mp3source} id="media" autoPlay="autoPlay" preload="auto"></audio>
+      			<audio loop="loop" src={mp3source} id="media" preload="auto"></audio>
       		</div>
 		);
 	}
