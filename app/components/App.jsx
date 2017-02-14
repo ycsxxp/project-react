@@ -4,6 +4,9 @@ require('../styles/App.scss');
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// 引入组件
+import MusicPlayer from './MusicPlayer.jsx';
+
 let imageDatas = require('../data/imageDatas.json');
 
 imageDatas = (function getImgUrl(imageDatasArr) {
@@ -307,21 +310,14 @@ class AppComponent extends React.Component {
 
         return (
             <section className="stage" ref="stage">
-				{
-                //<button onClick={this.yangchao}>ceshi</button>
-                //<div ref="color" style={{width:'100px',height:'100px',backgroundColor:this.state.bc}}></div>
-            }
+            	<MusicPlayer />
         		<section className="img-sec">
         			{imgFigures}
         		</section>
         		<nav className="controller-nav">
         			{controllerUnits}
         		</nav>
-        		<section className="music-sec">
-        			<audio controls="controls" autoPlay="autoPlay">
-        				<source src="sugar.mp3" type="audio/mpeg"/>
-        			</audio>
-        		</section>
+        		
       		</section>
         );
     }

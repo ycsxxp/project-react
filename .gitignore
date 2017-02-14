@@ -1,8 +1,12 @@
-# Logs
+#Logs
 *.log
 
 # Dependency directory
 node_modules
+
+#OS X
+*/.DS_Store
+.DS_Store
 
 # Compiled binary addons
 #build

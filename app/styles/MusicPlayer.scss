@@ -1,0 +1,25 @@
+#audio_btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 200;
+    width: 30px;
+    height: 30px;
+}
+#audio_btn, .off {
+    background-repeat: no-repeat;
+}
+.rotate {
+    -webkit-animation: rotating 1.2s linear infinite;
+    -moz-animation: rotating 1.2s linear infinite;
+    -o-animation: rotating 1.2s linear infinite;
+    animation: rotating 1.2s linear infinite;
+}
+.off {
+    background-image: url(./normalmusic.svg);
+    background-size: contain;
+}
+@keyframes rotating {
+    0% {transform: rotate(0);}
+    100% {transform: rotate(360deg);}
+}
