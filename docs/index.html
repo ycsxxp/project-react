@@ -11,11 +11,16 @@
 	<script src="bundle.js"></script>
 </body>
 <script type="text/javascript">
-window.onload = function() {
-	var media = document.getElementById('media');
-    media.addEventListener("canplay",function(){
+//window.onload = function() {
+	// var media = document.getElementById('media');
+ //    media.addEventListener("canplay",function(){
+ //    	document.getElementById('media').play();
+ //    });
+
+    var a = setInterval(document.getElementById('media').addEventListener("canplay",function(){
     	document.getElementById('media').play();
-    });
-}
+    	// console.log("a");
+    }),1000);
+//}
 </script>
 </html>
