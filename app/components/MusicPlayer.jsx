@@ -6,16 +6,37 @@ import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
 class MusicPlayer extends React.Component {
+
 	constructor(props) {
 		super(props);
-		this.musicPlay = this.musicPlay.bind(this);
 		this.state = {
 			played: false
 		}
+		//获取播放器
+		let media = document.getElementById('media');
+		// (function(){
+			//ios Safari不允许自动播放 监听一个ios 屏幕触摸事件touchstart
+		    document.addEventListener('touchstart', function(){
+		    	media.play();
+		    	this.setState({
+					played: !this.state.played 
+				});
+		    }, false);
+
+		    //微信中自动播放 解决 监听微信WeixinJSBridgeReady事件
+		    document.addEventListener("WeixinJSBridgeReady", function () {
+		    	media.play();
+		    	this.setState({
+					played: !this.state.played 
+				});
+			}, false);
+		// })();
+		this.musicPlay = this.musicPlay.bind(this);
+		
+
 	}
 
 	musicPlay(e) {
-		var media = document.getElementById("media");
 		if(this.state.played){
 			media.pause();
 		}else {
@@ -27,7 +48,7 @@ class MusicPlayer extends React.Component {
 	}
 
 	render() {
-		var classes = cx({
+		let classes = cx({
 			'off': true,
 			'rotate': this.state.played
 		});
