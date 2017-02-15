@@ -18,18 +18,16 @@
  //    });
 (function(){
 	var media = document.getElementById('media');
+
+	//ios Safari不允许自动播放 监听一个ios 屏幕触摸事件touchstart
     document.addEventListener('touchstart', function(){
     	media.play();
     }, false);
 
+    //微信中自动播放 解决 监听微信WeixinJSBridgeReady事件
     document.addEventListener("WeixinJSBridgeReady", function () {
     	media.play();
 	}, false);
 })();
-    // var a = setInterval(document.getElementById('media').addEventListener("canplay",function(){
-    	// document.getElementById('media').play();
-    	// console.log("a");
-    // }),1000);
-//}
 </script>
 </html>
