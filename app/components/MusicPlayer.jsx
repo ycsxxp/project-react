@@ -5,38 +5,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
-class MusicPlayer extends React.Component {
+let media = document.getElementById("media");
 
+(function(){
+	//ios Safari不允许自动播放 监听一个ios 屏幕触摸事件touchstart
+    document.addEventListener('touchstart', function(){
+    	media.play();
+    }, false);
+
+    //微信中自动播放 解决 监听微信WeixinJSBridgeReady事件
+    document.addEventListener("WeixinJSBridgeReady", function () {
+    	media.play();
+	}, false);
+})();
+
+class MusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
+		this.musicPlay = this.musicPlay.bind(this);
 		this.state = {
 			played: false
 		}
-		//获取播放器
-		let media = document.getElementById('media');
-		// (function(){
-			//ios Safari不允许自动播放 监听一个ios 屏幕触摸事件touchstart
-		    document.addEventListener('touchstart', function(){
-		    	media.play();
-		    	this.setState({
-					played: !this.state.played 
-				});
-		    }, false);
-
-		    //微信中自动播放 解决 监听微信WeixinJSBridgeReady事件
-		    document.addEventListener("WeixinJSBridgeReady", function () {
-		    	media.play();
-		    	this.setState({
-					played: !this.state.played 
-				});
-			}, false);
-		// })();
-		this.musicPlay = this.musicPlay.bind(this);
-		
-
 	}
 
 	musicPlay(e) {
+		let media = document.getElementById("media");
 		if(this.state.played){
 			media.pause();
 		}else {
