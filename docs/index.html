@@ -16,11 +16,44 @@
  //    media.addEventListener("canplay",function(){
  //    	document.getElementById('media').play();
  //    });
+(function(){
 
-    var a = setInterval(document.getElementById('media').addEventListener("canplay",function(){
+	var audioEl = document.getElementById('media');
+	function forceSafariPlayAudio() {
+        audioEl.load(); // iOS 9   还需要额外的 load 一下, 否则直接 play 无效
+        audioEl.play(); // iOS 7/8 仅需要 play 一下
+    }
+    
+    audioEl.addEventListener('loadstart', function() {
+        
+    }, false);
+    audioEl.addEventListener('loadeddata', function() {
+
+    }, false);
+    audioEl.addEventListener('loadedmetadata', function() {
+
+    }, false);
+    audioEl.addEventListener('canplay', function() {
+
+    }, false);
+    audioEl.addEventListener('play', function() {
+  
+        // 当 audio 能够播放后, 移除这个事件
+        window.removeEventListener('touchstart', forceSafariPlayAudio, false);
+    }, false);
+    audioEl.addEventListener('playing', function() {
+
+    }, false);
+    audioEl.addEventListener('pause', function() {
+
+    }, false);
+
+    window.addEventListener('touchstart', forceSafariPlayAudio, false);
+})();
+    // var a = setInterval(document.getElementById('media').addEventListener("canplay",function(){
     	// document.getElementById('media').play();
     	// console.log("a");
-    }),1000);
+    // }),1000);
 //}
 </script>
 </html>
