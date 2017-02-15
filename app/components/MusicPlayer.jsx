@@ -15,10 +15,11 @@ class MusicPlayer extends React.Component {
 	}
 
 	musicPlay(e) {
+		var media = document.getElementById("media");
 		if(this.state.played){
-			document.getElementById("media").pause();
+			media.pause();
 		}else {
-			document.getElementById("media").play();
+			media.play();
 		}
 		this.setState({
 			played: !this.state.played 
