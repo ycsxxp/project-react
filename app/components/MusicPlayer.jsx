@@ -5,23 +5,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
-let media = document.getElementById("media");
-
-(function(){
-	//ios Safari不允许自动播放 监听一个ios 屏幕触摸事件touchstart
-    document.addEventListener('touchstart', function(){
-    	media.play();
-    }, false);
-
-    //微信中自动播放 解决 监听微信WeixinJSBridgeReady事件
-    document.addEventListener("WeixinJSBridgeReady", function () {
-    	media.play();
-	}, false);
-})();
-
 class MusicPlayer extends React.Component {
+
 	constructor(props) {
 		super(props);
+		let media = document.getElementById("media");
 		this.musicPlay = this.musicPlay.bind(this);
 		this.state = {
 			played: false
@@ -29,14 +17,29 @@ class MusicPlayer extends React.Component {
 	}
 
 	musicPlay(e) {
-		let media = document.getElementById("media");
-		if(this.state.played){
+		if (this.state.played) {
 			media.pause();
-		}else {
+		} else {
 			media.play();
 		}
 		this.setState({
-			played: !this.state.played 
+			played: !this.state.played
+		});
+	}
+
+	componentDidMount() {
+		media.play();
+		//ios Safari不允许自动播放 监听一个ios 屏幕触摸事件touchstart
+		document.addEventListener('touchstart', function() {
+			media.play();
+		}, false);
+
+		//微信中自动播放 解决 监听微信WeixinJSBridgeReady事件
+		document.addEventListener("WeixinJSBridgeReady", function() {
+			media.play();
+		}, false);
+		this.setState({
+			played: !this.state.played
 		});
 	}
 
