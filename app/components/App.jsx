@@ -98,7 +98,7 @@ class ControllerUnit extends React.Component {
         } else {
             this.props.center();
         }
-        document.getElementById("media").play();
+        
         e.preventDefault();
         e.stopPropagation();
     }
